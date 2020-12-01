@@ -1,0 +1,247 @@
+<?php
+
+use Drupal\Core\Config\Entity\ConfigEntityType;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Database\Database;
+
+/**
+ * Implements hook_schema.
+ */
+ function quickbooks_schema() { 
+   $schema['quickbooks_customers'] = array(
+     //The data table that stores QuickBooks Custmoers Details.
+     'description' => 'The data table that stores QuickBooks Custmoers Details',
+     'fields' => array(
+        'primary_key' => array(
+          'description' => 'Unique ID.',
+          'type' => 'serial',
+          'not null' => TRUE,
+        ),
+       'customerID' => array(
+         'description' => '',
+         'type' => 'varchar',
+         'length' => 32,
+         'default' => '',
+       ),
+       'UID' => array(
+         'description' => '',
+         'type' => 'int',
+         'default' => 0,
+       ),
+       'OrderID' => array(
+         'description' => '',
+         'type' => 'varchar',
+         'length' => 32,
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'Created' => array(
+          'description' => '',
+          'type' => 'varchar',
+          'length' => 32,
+          'not null' => FALSE,
+          'default' => time(),
+       ),
+       'CompanyID' => array(
+         'description' => '',
+         'type' => 'varchar',
+         'length' => 32,
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'InvoiceStatus' => array(
+         'description' => '',
+         'type' => 'varchar',
+         'length' => 32,
+         'not null' => TRUE,
+         'default' => '',
+       ),
+     ),
+     'indexes' => array(
+       'primary_key' => array(
+         'primary_key',
+       ),
+     ),
+     'primary key' => array('primary_key'),
+   );
+
+   $schema['quickbooks_invoices'] = array(
+     //The data table that stores QuickBooks Custmoers Details.
+     'description' => 'The data table that stores QuickBooks Invoice Details',
+     'fields' => array(
+        'primary_key' => array(
+          'description' => 'Unique ID.',
+          'type' => 'serial',
+          'not null' => TRUE,
+        ),
+        'OrderID' => array(
+         'description' => '',
+         'type' => 'varchar',
+         'length' => 32,
+         'default' => '',
+       ),
+       'CustomerID' => array(
+         'description' => '',
+         'type' => 'varchar',
+         'length' => 32,
+         'default' => '',
+       ),
+       'InvoiceStatus' => array(
+         'description' => '',
+         'type' => 'varchar',
+         'length' => 32,
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'Created' => array(
+          'description' => '',
+          'type' => 'varchar',
+          'length' => 32,
+          'not null' => FALSE,
+          'default' => time(),
+       ),
+       'InvoiceID' => array(
+         'description' => '',
+         'type' => 'int',
+         'default' => 0,
+       ),
+       'CompanyID' => array(
+         'description' => '',
+         'type' => 'varchar',
+         'length' => 32,
+         'not null' => TRUE,
+         'default' => '',
+       ),
+     ),
+     'indexes' => array(
+       'primary_key' => array(
+         'primary_key',
+       ),
+     ),
+     'primary key' => array('primary_key'),
+   );
+   
+   return $schema;
+ }
+
+
+/**
+ * Adds cutom database tables for module.
+ */
+function quickbooks_update_8701() {
+  $new_schema['quickbooks_customers'] = array(
+    //The data table that stores QuickBooks Custmoers Details.
+     'description' => 'The data table that stores QuickBooks Custmoers Details',
+     'fields' => array(
+        'primary_key' => array(
+          'description' => 'Unique ID.',
+          'type' => 'serial',
+          'not null' => TRUE,
+        ),
+       'customerID' => array(
+         'description' => '',
+         'type' => 'varchar',
+         'length' => 32,
+         'default' => '',
+       ),
+       'UID' => array(
+         'description' => '',
+         'type' => 'int',
+         'default' => 0,
+       ),
+       'OrderID' => array(
+         'description' => '',
+         'type' => 'int',
+         'default' => 0,
+       ),
+       'Created' => array(
+          'description' => '',
+          'type' => 'varchar',
+          'length' => 32,
+          'not null' => FALSE,
+          'default' => time(),
+       ),
+       'CompanyID' => array(
+         'description' => '',
+         'type' => 'varchar',
+         'length' => 32,
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'InvoiceStatus' => array(
+         'description' => '',
+         'type' => 'varchar',
+         'length' => 32,
+         'not null' => TRUE,
+         'default' => '',
+       ),
+     ),
+     'indexes' => array(
+       'primary_key' => array(
+         'primary_key',
+       ),
+     ),
+     'primary key' => array('primary_key'),
+  );
+  $new_schema['quickbooks_invoices'] = array(
+     //The data table that stores QuickBooks Custmoers Details.
+     'description' => 'The data table that stores QuickBooks Invoice Details',
+     'fields' => array(
+        'primary_key' => array(
+          'description' => 'Unique ID.',
+          'type' => 'serial',
+          'not null' => TRUE,
+        ),
+        'OrderID' => array(
+         'description' => '',
+         'type' => 'varchar',
+         'length' => 32,
+         'default' => '',
+       ),
+       'CustomerID' => array(
+         'description' => '',
+         'type' => 'varchar',
+         'length' => 32,
+         'default' => '',
+       ),
+       'InvoiceStatus' => array(
+         'description' => '',
+         'type' => 'varchar',
+         'length' => 32,
+         'not null' => TRUE,
+         'default' => '',
+       ),
+       'Created' => array(
+          'description' => '',
+          'type' => 'varchar',
+          'length' => 32,
+          'not null' => FALSE,
+          'default' => time(),
+       ),
+       'InvoiceID' => array(
+         'description' => '',
+         'type' => 'int',
+         'default' => 0,
+       ),
+       'CompanyID' => array(
+         'description' => '',
+         'type' => 'varchar',
+         'length' => 32,
+         'not null' => TRUE,
+         'default' => '',
+       ),
+     ),
+     'indexes' => array(
+       'primary_key' => array(
+         'primary_key',
+       ),
+     ),
+     'primary key' => array('primary_key'),
+   );
+  
+  $schema = Database::getConnection()->schema();
+  $schema->createTable('quickbooks_customers', $new_schema['quickbooks_customers']);
+  $schema->createTable('quickbooks_invoices', $new_schema['quickbooks_invoices']);
+}
+

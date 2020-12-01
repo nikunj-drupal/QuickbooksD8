@@ -1,0 +1,23 @@
+quickbooks.form:
+  title: 'QuickBooks settings'
+  description: 'Uses OpenID to connect your Drupal instance to QuickBooks Online.'
+  route_name: quickbooks.form
+  parent: 'system.admin_config_services'
+
+quickbooks_auth.form:
+  title: 'QuickBooks Auth settings'
+  description: 'Quickbook APP Auth Credetials'
+  route_name: quickbooks_auth.form
+  parent: 'system.admin_config_services'
+
+quickbooks_auth.customers:
+  title: 'QuickBooks Customers'
+  description: 'Quickbook APP Auth Credetials'
+  route_name: view.quickbooks_customers.page_1
+  parent: 'system.admin_config_services'
+
+quickbooks_auth.invoices:
+  title: 'QuickBooks Invoices'
+  description: 'Quickbook APP Auth Credetials'
+  route_name: view.quickbooks_invoices.page_1
+  parent: 'system.admin_config_services'

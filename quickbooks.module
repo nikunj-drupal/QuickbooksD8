@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * The ji_quickbooks.module file.
+ */
+
+use Drupal\quickbooks\QuickBooksService;
+use Drupal\quickbooks\QuickBooksSupport;
+use Drupal\commerce_order\Entity\Order;
+use Drupal\user\Entity\User;
+
+/**
+ * Implements hook_cron().
+ *
+ * Attempt to regenerate the QuickBooks tokens.
+ */
+function quickbooks_cron() {
+
+  //Refresh Quickbooks Access Token.
+  $QuickBooksService = new QuickBooksService();
+  $refreshToken= \Drupal::state()->get('quickbooks_settings_access_refreshtoken');
+  $getAccessToken = $QuickBooksService->refreshAccessToken($refreshToken);
+  if ($getAccessToken) {
+    \Drupal::state()->set('quickbooks_settings_access_token', $getAccessToken->getAccessToken());
+    \Drupal::state()->set('quickbooks_settings_access_refreshtoken', $getAccessToken->getRefreshToken());
+    \Drupal::state()->set('quickbooks_settings_access_token_expires_in', $getAccessToken->getAccessTokenExpiresAt());
+    \Drupal::state()->set('quickbooks_settings_x_refresh_token_expires_in', $getAccessToken->getRefreshTokenExpiresAt());
+    \Drupal::state()->set('quickbooks_settings_consumer_key', $getAccessToken->getClientID());
+    \Drupal::state()->set('quickbooks_settings_consumer_secret', $getAccessToken->getClientSecret());
+
+    //
+    drupal_flush_all_caches();
+  }
+  //End
+}

@@ -1,0 +1,23 @@
+quickbooks.form:
+  path: '/admin/config/quickbooks'
+  defaults:
+    _title: 'QuickBooks Settings'
+    _form: '\Drupal\quickbooks\Form\QuickBooksSettingsForm'
+  requirements:
+    _permission: 'administer site configuration'
+
+quickbooks_auth.form:
+  path: '/admin/config/quickbooksauth'
+  defaults:
+    _title: 'QuickBooks Settings'
+    _form: '\Drupal\quickbooks\Form\QuickBooksAuthSettingsForm'
+  requirements:
+    _permission: 'administer site configuration'
+
+quickbooks.saveoauthsettings:
+ path: '/oauth-redirect'
+ defaults:
+  _controller: '\Drupal\quickbooks\Controller\OAuthResponseController::saveOAuthSettingsPage'
+  _title: 'Saves OAuth settings'
+ requirements:
+  _permission: 'administer site configuration'

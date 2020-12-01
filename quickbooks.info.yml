@@ -1,0 +1,5 @@
+name: QuickBooks Custom
+description: Custom module for various funcationalities.
+core: 8.x
+type: module
+package: Custom

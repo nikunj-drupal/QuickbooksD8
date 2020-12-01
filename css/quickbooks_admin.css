@@ -1,0 +1,30 @@
+.form-item-default-product,
+.form-item-term,
+.form-item-payment-method,
+.form-item-payment-account {
+  float: left;
+  clear: both;
+  min-width: 179px;
+}
+
+.quickbooks-img {
+  margin: 6px;
+  float: left;
+}
+
+#edit-invoice,
+#edit-payment {
+  clear: both;
+}
+
+.quickbooks-img img {
+  border: black;
+  border-style: dashed;
+  border-width: 1px;
+  width: auto;
+  height: auto;
+}
+
+.quickbooks-img .description {
+  max-width: 335px;
+}

@@ -1,0 +1,14 @@
+quickbooks_intuit_ipp_anywhere:
+ js:
+    https://appcenter.intuit.com/Content/IA/intuit.ipp.anywhere.js: { type: external }
+    
+quickbooks_openid_logout:
+ js:
+    js/openid_logout.js: {}
+    
+quickbooks_form_css:
+  css:
+    layout:
+      css/quickbooks_admin.css: {}
+    theme:
+      css/quickbooks_admin.css: {}

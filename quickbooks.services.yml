@@ -1,0 +1,5 @@
+services:
+    quickbooks.order_complete:
+        class: Drupal\quickbooks\EventSubscriber\OrderCompleteSubscriber
+        tags:
+            - { name: 'event_subscriber' }
